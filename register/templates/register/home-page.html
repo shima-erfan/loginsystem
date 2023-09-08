@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+{% if request.user.is_authenticated %}
+
+<h1>Hello {{request.user.first_name}}</h1>
+<br>
+<a href="{% url 'logout' %}">logout</a>
+
+{% else %}
+
+<h1>Hello</h1>
+<br>
+<a href="{% url 'login' %}">login/sign up</a>
+
+{% endif %}
+<br>
+
+<img class="wlcm" src="{% static 'images/image1.png' %}" alt="hello" />
+
+{% endblock content %}

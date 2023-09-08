@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="wrapper">
+    
+    <div class="inner">
+        <img src="{% static 'images/image1.png' %}" alt="" class="image-1">
+
+        {% if page == 'register' %}
+        <form action=""method="post">
+            {% csrf_token %}
+            <h3>New Account</h3>
+            
+            {% for field in form %}
+            <div class="form-holder">
+
+                <label>{{field.label}}</label>
+                {{field}}
+
+                {% for error in field.errors %}
+                <p style="color: red;">{{error}}</p>
+                {% endfor %}
+
+            </div>
+            {% endfor %}
+
+            <button>
+                <span>Register</span>
+            </button>
+
+            <p>Already have an account?<a href="{% url 'login' %}">sign in</a></p>
+        </form>
+
+        {% else %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <h3>Sign In</h3>
+            <div class="form-holder">
+                <span class="lnr lnr-user"></span>
+                <input type="text" class="form-control" placeholder="username" name="username">
+            </div>
+
+            <div class="form-holder">
+                <span class="lnr lnr-lock"></span>
+                <input type="password" class="form-control" placeholder="Password" name="password">
+            </div>
+            <h5><a href="#">Forgot Password?</a></h5>
+
+            <button>
+                <span>Login</span>
+            </button>
+
+            <br>
+            <br>
+            <h5>Not a member? <a href="{% url 'register' %}">sign up</a></h5>
+
+        </form>
+
+        {% endif %}
+
+        <img src="{% static 'images/image2.png' %}" alt="" class="image-2">
+    </div>
+    
+</div>
+
+{% endblock content %}
+
+
